@@ -29,5 +29,19 @@ private:
     // access the processor object that created it.
     TestSliderAudioProcessor& audioProcessor;
 
+    juce::Slider sLinearHorizontal;
+    juce::Slider sLinearVertical;
+    juce::Slider sLinearBar;
+    juce::Slider sLinearBarVertical;
+    juce::Slider sRotary;
+    juce::Slider sRotaryHorizontalDrag;
+    juce::Slider sRotaryVerticalDrag;
+    juce::Slider sRotaryHorizontalVerticalDrag;
+    juce::Slider sIncDecButtons;
+    juce::Slider sTwoValueHorizontal;
+    juce::Slider sTwoValueVertical;
+    juce::Slider sThreeValueHorizontal;
+    juce::Slider sThreeValueVertical;
+    
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (TestSliderAudioProcessorEditor)
 };
