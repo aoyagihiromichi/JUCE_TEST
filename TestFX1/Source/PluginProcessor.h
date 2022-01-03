@@ -55,9 +55,11 @@ public:
 
     juce::AudioParameterFloat* gain1;
     juce::AudioParameterFloat* gain2;
+    juce::AudioParameterFloat* delaytime;
 
 private:
     juce::AudioBuffer<float> delayBuffer;
+    double sampleRateSave { 0.0f };
     int writePosition { 0 };
     void fillBuffer(int channel, int bufferSize, int delayBufferSize, float* channelData);
     void addDelay(int channel, int bufferSize, int delayBufferSize, juce::AudioBuffer<float>& buffer);

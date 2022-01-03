@@ -24,6 +24,7 @@ TestFX1AudioProcessor::TestFX1AudioProcessor()
 {
     addParameter(gain1 = new juce::AudioParameterFloat("Gain1", "Gain1", 0.0f, 1.0f, 0.1f));
     addParameter(gain2 = new juce::AudioParameterFloat("Gain2", "Gain2", 0.0f, 1.0f, 0.7f));
+    addParameter(delaytime = new juce::AudioParameterFloat("DelayTime", "DelayTime", 0.0f, 4.0f, 2.0f));
 }
 
 TestFX1AudioProcessor::~TestFX1AudioProcessor()
@@ -97,8 +98,9 @@ void TestFX1AudioProcessor::prepareToPlay (double sampleRate, int samplesPerBloc
 {
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
-    auto delayBufferSize = sampleRate * 2;
-    delayBuffer.setSize(getTotalNumOutputChannels(), (int)delayBufferSize);
+    auto delayBufferMaxSize = sampleRate * 4;
+    delayBuffer.setSize(getTotalNumOutputChannels(), (int)delayBufferMaxSize);
+    sampleRateSave = sampleRate;
 }
 
 void TestFX1AudioProcessor::releaseResources()
@@ -144,7 +146,8 @@ void TestFX1AudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, juce
         buffer.clear (i, 0, buffer.getNumSamples());
 
     auto bufferSize = buffer.getNumSamples();
-    auto delayBufferSize = delayBuffer.getNumSamples();
+//  auto delayBufferSize = delayBuffer.getNumSamples();
+    auto delayBufferSize = (int)*delaytime * (int)sampleRateSave;
 
     // 全InputChannelに対して実行
     for (int channel = 0; channel < totalNumInputChannels; ++channel)

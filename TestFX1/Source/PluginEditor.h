@@ -31,6 +31,7 @@ private:
 
     juce::Slider sGain1;
     juce::Slider sGain2;
+    juce::Slider sDelay;
     void sliderValueChanged(juce::Slider* slider) override;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (TestFX1AudioProcessorEditor)
